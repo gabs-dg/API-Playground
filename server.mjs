@@ -6,6 +6,7 @@ import { fileURLToPath } from "node:url";
 const root = fileURLToPath(new URL(".", import.meta.url)).replace(/[\\/]$/, "");
 let port = Number(process.env.PORT ?? 3000);
 let hasLoggedStartup = false;
+
 const mimeTypes = {
 	".css": "text/css; charset=utf-8",
 	".html": "text/html; charset=utf-8",
@@ -15,16 +16,34 @@ const mimeTypes = {
 	".svg": "image/svg+xml",
 };
 
+// CORS
+const corsHeaders = {
+	"Access-Control-Allow-Origin": "https://gabs-dg.github.io",
+	"Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+	"Access-Control-Allow-Headers": "Content-Type",
+};
+
 function sendJson(response, status, body) {
-	response.writeHead(status, { "Content-Type": "application/json; charset=utf-8" });
+	response.writeHead(status, {
+		"Content-Type": "application/json; charset=utf-8",
+		...corsHeaders,
+	});
+
 	response.end(JSON.stringify(body));
 }
 
 async function proxyRequest(request, response) {
 	try {
 		const chunks = [];
-		for await (const chunk of request) chunks.push(chunk);
-		const config = JSON.parse(Buffer.concat(chunks).toString("utf8"));
+
+		for await (const chunk of request) {
+			chunks.push(chunk);
+		}
+
+		const config = JSON.parse(
+			Buffer.concat(chunks).toString("utf8")
+		);
+
 		const target = new URL(config.url);
 
 		if (!["http:", "https:"].includes(target.protocol)) {
@@ -32,29 +51,60 @@ async function proxyRequest(request, response) {
 		}
 
 		for (const [key, value] of Object.entries(config.params ?? {})) {
-			if (key) target.searchParams.append(key, String(value));
+			if (key) {
+				target.searchParams.append(key, String(value));
+			}
 		}
 
 		const headers = new Headers(config.headers ?? {});
+
 		if (config.auth?.type === "bearer" && config.auth.token) {
-			headers.set("Authorization", `Bearer ${config.auth.token}`);
-		}
-		if (config.auth?.type === "basic") {
-			const credentials = Buffer.from(`${config.auth.username ?? ""}:${config.auth.password ?? ""}`).toString("base64");
-			headers.set("Authorization", `Basic ${credentials}`);
-		}
-		if (config.auth?.type === "api-key" && config.auth.name && config.auth.value) {
-			headers.set(config.auth.name, config.auth.value);
+			headers.set(
+				"Authorization",
+				`Bearer ${config.auth.token}`
+			);
 		}
 
-		const method = String(config.method ?? "GET").toUpperCase();
+		if (config.auth?.type === "basic") {
+			const credentials = Buffer.from(
+				`${config.auth.username ?? ""}:${config.auth.password ?? ""}`
+			).toString("base64");
+
+			headers.set(
+				"Authorization",
+				`Basic ${credentials}`
+			);
+		}
+
+		if (
+			config.auth?.type === "api-key" &&
+			config.auth.name &&
+			config.auth.value
+		) {
+			headers.set(
+				config.auth.name,
+				config.auth.value
+			);
+		}
+
+		const method = String(
+			config.method ?? "GET"
+		).toUpperCase();
+
 		const upstream = await fetch(target, {
 			method,
 			headers,
-			body: !["GET", "HEAD"].includes(method) && config.body ? config.body : undefined,
+			body:
+				!["GET", "HEAD"].includes(method) && config.body
+					? config.body
+					: undefined,
 		});
-		const contentType = upstream.headers.get("content-type") ?? "";
+
+		const contentType =
+			upstream.headers.get("content-type") ?? "";
+
 		const text = await upstream.text();
+
 		let data = text;
 
 		if (text && contentType.includes("json")) {
@@ -76,15 +126,30 @@ async function proxyRequest(request, response) {
 			status: 0,
 			statusText: "Proxy Error",
 			ok: false,
-			data: error instanceof Error ? error.message : "Erro desconhecido no proxy.",
+			data:
+				error instanceof Error
+					? error.message
+					: "Erro desconhecido no proxy.",
 		});
 	}
 }
 
 async function serveStatic(request, response) {
-	const requestedPath = decodeURIComponent(new URL(request.url, "http://localhost").pathname);
-	const relativePath = requestedPath === "/" ? "index.html" : requestedPath.slice(1);
-	const filePath = normalize(join(root, relativePath));
+	const requestedPath = decodeURIComponent(
+		new URL(
+			request.url,
+			"http://localhost"
+		).pathname
+	);
+
+	const relativePath =
+		requestedPath === "/"
+			? "index.html"
+			: requestedPath.slice(1);
+
+	const filePath = normalize(
+		join(root, relativePath)
+	);
 
 	if (!filePath.startsWith(root + sep)) {
 		response.writeHead(403);
@@ -94,11 +159,18 @@ async function serveStatic(request, response) {
 
 	try {
 		const fileStats = await stat(filePath);
-		if (!fileStats.isFile()) throw new Error("Not a file");
+
+		if (!fileStats.isFile()) {
+			throw new Error("Not a file");
+		}
+
 		response.writeHead(200, {
-			"Content-Type": mimeTypes[extname(filePath)] ?? "application/octet-stream",
+			"Content-Type":
+				mimeTypes[extname(filePath)] ??
+				"application/octet-stream",
 			"Cache-Control": "no-store",
 		});
+
 		response.end(await readFile(filePath));
 	} catch {
 		response.writeHead(404);
@@ -107,23 +179,47 @@ async function serveStatic(request, response) {
 }
 
 const server = createServer((request, response) => {
-	if (request.method === "POST" && request.url === "/api/proxy") {
+
+	// Permite que o navegador faça o preflight CORS
+	if (request.method === "OPTIONS") {
+		response.writeHead(204, corsHeaders);
+		response.end();
+		return;
+	}
+
+	// Endpoint da API
+	if (
+		request.method === "POST" &&
+		request.url === "/api/proxy"
+	) {
 		proxyRequest(request, response);
 		return;
 	}
+
+	// Arquivos estáticos
 	serveStatic(request, response);
 });
 
 function listen() {
 	server.once("error", (error) => {
-		if (error.code !== "EADDRINUSE") throw error;
+		if (error.code !== "EADDRINUSE") {
+			throw error;
+		}
+
 		port += 1;
 		listen();
 	});
+
 	server.listen(port, () => {
-		if (hasLoggedStartup) return;
+		if (hasLoggedStartup) {
+			return;
+		}
+
 		hasLoggedStartup = true;
-		process.stdout.write(`API Playground disponível em http://localhost:${port}\n`);
+
+		process.stdout.write(
+			`API Playground disponível em http://localhost:${port}\n`
+		);
 	});
 }
 
