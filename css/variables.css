@@ -1,0 +1,14 @@
+:root {
+    --bg-dark: #0a0a0a;
+    --bg-panel: #111111;
+    --bg-input: #1a1a1a;
+    
+    --text-main: #ffffff;
+    --text-muted: #888888;
+    
+    --red-primary: #dc2626;
+    --red-hover: #b91c1c;
+    
+    --border-color: #222222;
+    --radius: 6px;
+}
