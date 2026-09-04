@@ -21,17 +21,26 @@ export interface ApiResult {
 }
 
 export async function fetchApi(config: RequestConfig): Promise<ApiResult> {
-	const proxyResponse = await fetch("/api/proxy", {
-		method: "POST",
-		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(config),
-	});
+	const proxyResponse = await fetch(
+		"https://api-playground-2.onrender.com/api/proxy",
+		{
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(config),
+		}
+	);
+
 	const result = (await proxyResponse.json()) as ApiResult;
 
 	if (!proxyResponse.ok) {
-		throw new Error(typeof result.data === "string" ? result.data : "Falha no proxy local");
+		throw new Error(
+			typeof result.data === "string"
+				? result.data
+				: "Falha no proxy"
+		);
 	}
 
 	return result;
 }
-
