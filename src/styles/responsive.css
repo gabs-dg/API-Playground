@@ -1,0 +1,124 @@
+@media (max-width: 768px) {
+    .header-inner {
+        min-height: auto;
+        flex-wrap: wrap;
+        gap: 0.75rem;
+        padding: 0.85rem 1rem;
+    }
+
+    .brand,
+    .header-meta {
+        min-width: auto;
+    }
+
+    .brand {
+        position: static;
+        transform: none;
+    }
+
+    .brand-copy small,
+    .header-version {
+        display: none;
+    }
+
+    .main-nav {
+        order: 3;
+        width: 100%;
+        justify-content: space-between;
+        overflow-x: auto;
+    }
+
+    .nav-link {
+        flex: 0 0 auto;
+        padding: 0.45rem 0.35rem;
+        font-size: 0.68rem;
+    }
+
+    .container {
+        grid-template-columns: 1fr;
+        height: auto;
+    }
+
+    .workspace-intro {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .footer-main {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 2rem 1.5rem;
+        padding: 2rem 1rem;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .sidebar {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+        max-height: 28rem;
+    }
+
+    .sidebar-tabs {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .explorer-modal {
+        padding: 0;
+    }
+
+    .explorer-window {
+        width: 100%;
+        height: 100vh;
+        border-radius: 0;
+    }
+
+    .explorer-header,
+    .explorer-toolbar {
+        padding-right: 1rem;
+        padding-left: 1rem;
+    }
+
+    .explorer-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 0.6rem;
+    }
+
+    .explorer-toolbar .search-box {
+        width: 100%;
+    }
+
+    .explorer-grid {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .request-box {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .request-label {
+        padding: 0.35rem 0.55rem;
+    }
+
+    .method-select, .btn-send {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .request-options {
+        grid-template-columns: 1fr;
+    }
+
+    .field-wide {
+        grid-column: span 1;
+    }
+}

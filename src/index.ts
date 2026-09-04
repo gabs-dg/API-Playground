@@ -1,3 +1,13 @@
-import exemple from "./layouts/components/exemple.js";
+import { initRequestBuilder } from "./layouts/components/requestBuilder.js";
+import { initCatalog } from "./catalog/catalogView.js";
 
-console.log(exemple());
+function initApp(): void {
+	initRequestBuilder();
+	initCatalog();
+}
+
+if (document.readyState === "loading") {
+	document.addEventListener("DOMContentLoaded", initApp, { once: true });
+} else {
+	initApp();
+}

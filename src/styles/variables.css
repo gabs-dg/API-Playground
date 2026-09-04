@@ -4,10 +4,16 @@
     --bg-input: #1a1a1a;
     
     --text-main: #ffffff;
+    --text-soft: #d7d7dc;
     --text-muted: #888888;
+    --text-dim: #676773;
+    --text-cool: #a9c7df;
+    --text-warm: #e3b1a6;
     
     --red-primary: #dc2626;
     --red-hover: #b91c1c;
+    --green-success: #34d399;
+    --blue-accent: #8bb9dc;
     
     --border-color: #222222;
     --radius: 6px;
