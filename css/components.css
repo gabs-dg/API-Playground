@@ -1,0 +1,118 @@
+.api-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    margin-bottom: 0.5rem;
+    cursor: pointer;
+}
+
+.api-card:hover {
+    border-color: var(--red-primary);
+}
+
+.api-card.active {
+    border-color: var(--red-primary);
+    color: var(--red-primary);
+}
+
+.request-box {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.method-select {
+    background-color: var(--red-primary);
+    color: white;
+    padding: 0.75rem;
+    border-radius: var(--radius);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.url-input {
+    flex: 1;
+    padding: 0.75rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    color: var(--text-main);
+    font-family: monospace;
+}
+
+.url-input:focus {
+    border-color: var(--red-primary);
+    outline: none;
+}
+
+.btn-send {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--red-primary);
+    color: white;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--radius);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-send:hover {
+    background-color: var(--red-hover);
+}
+
+.response-box {
+    flex: 1;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+}
+
+.response-info {
+    display: flex;
+    gap: 1rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.status-tag, .time-tag {
+    font-size: 0.8rem;
+    font-family: monospace;
+    color: var(--text-muted);
+}
+
+.status-tag.success {
+    color: #10b981;
+}
+
+.code-block {
+    flex: 1;
+    padding: 1rem;
+    background-color: var(--bg-dark);
+    font-family: monospace;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    overflow: auto;
+    white-space: pre-wrap;
+}
+
+.logo-img {
+    height: 40px;
+    width: auto;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 2rem;
+    background-color: var(--bg-panel);
+    border-bottom: 1px solid var(--border-color);
+}

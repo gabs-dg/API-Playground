@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Playground</title>
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="icon" type="image/png" href="./assets/LayoutLogo.png">
+</head>
+<body>
+    <header class="header">
+    <img src="./assets/LayoutLogo.png" alt="API Playground" class="logo-img">
+    <h1>API PLAYGROUND</h1>
+</header>
+
+    <main class="container">
+        <aside class="sidebar">
+            <h2>APIs</h2>
+            <div class="api-list">
+                <div class="api-card active" data-api="users">
+                    <span class="iconify" data-icon="ph:users"></span>
+                    <span>Users API</span>
+                </div>
+                <div class="api-card" data-api="countries">
+                    <span class="iconify" data-icon="ph:globe"></span>
+                    <span>Countries API</span>
+                </div>
+            </div>
+        </aside>
+
+        <section class="content">
+            <div class="request-box">
+                <select class="method-select" id="req-method">
+                    <option value="GET">GET</option>
+                    <option value="POST">POST</option>
+                </select>
+                <input type="text" class="url-input" id="req-url" value="https://jsonplaceholder.typicode.com/users">
+                <button class="btn-send" id="sendBtn">
+                    SEND REQUEST
+                    <span class="iconify" data-icon="ph:play-fill"></span>
+                </button>
+            </div>
+
+            <div class="response-box">
+                <div class="response-info">
+                    <span class="status-tag" id="status">-</span>
+                    <span class="time-tag" id="time">-</span>
+                </div>
+                <pre class="code-block" id="response">Clique em SEND REQUEST para testar</pre>
+            </div>
+        </section>
+    </main>
+
+    <script type="module" src="./src/index.ts"></script>
+</body>
+</html>
