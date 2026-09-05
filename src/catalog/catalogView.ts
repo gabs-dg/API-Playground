@@ -23,10 +23,42 @@ interface CatalogViewElements {
 }
 
 const catalogSourceUrl = "https://api.apis.guru/v2/list.json";
-const explorerPageSize = 36;
+const CACHE_KEY = "api-catalog-cache";
+const CACHE_EXPIRY = 24 * 60 * 60 * 1000;
+const explorerPageSize = 20;
 let catalogApis: CatalogApi[] = [];
 let filteredExplorerApis: CatalogApi[] = [];
 let explorerVisibleCount = 0;
+let catalogLoaded = false;
+
+function debounce<T extends (...args: any[]) => any>(func: T, wait: number): (...args: Parameters<T>) => void {
+	let timeout: ReturnType<typeof setTimeout> | null = null;
+	return (...args: Parameters<T>) => {
+		if (timeout) clearTimeout(timeout);
+		timeout = setTimeout(() => func(...args), wait);
+	};
+}
+
+function getCachedCatalog(): CatalogApi[] | null {
+	try {
+		const cached = localStorage.getItem(CACHE_KEY);
+		if (!cached) return null;
+		const { data, timestamp } = JSON.parse(cached);
+		if (Date.now() - timestamp > CACHE_EXPIRY) {
+			localStorage.removeItem(CACHE_KEY);
+			return null;
+		}
+		return data;
+	} catch {
+		return null;
+	}
+}
+
+function setCachedCatalog(data: CatalogApi[]): void {
+	try {
+		localStorage.setItem(CACHE_KEY, JSON.stringify({ data, timestamp: Date.now() }));
+	} catch {}
+}
 
 function getElements(): CatalogViewElements {
 	return {
@@ -46,6 +78,26 @@ function getElements(): CatalogViewElements {
 		explorerMessage: document.getElementById("explorer-message"),
 		explorerClose: document.getElementById("explorer-close") as HTMLButtonElement | null,
 	};
+}
+
+function showLoadingState(elements: CatalogViewElements): void {
+	if (elements.apiList) {
+		elements.apiList.innerHTML = `
+			<div class="skeleton-loader">
+				<div class="skeleton-row"></div>
+				<div class="skeleton-row"></div>
+				<div class="skeleton-row"></div>
+			</div>
+		`;
+	}
+	if (elements.emptyState) elements.emptyState.classList.add("hidden");
+}
+
+function hideLoadingState(elements: CatalogViewElements): void {
+	if (elements.apiList) {
+		const skeleton = elements.apiList.querySelector(".skeleton-loader");
+		if (skeleton) skeleton.remove();
+	}
 }
 
 function setSelectedCard(apiId: string, sourceCard?: HTMLElement): void {
@@ -81,6 +133,12 @@ function openDetails(api: CatalogApi, elements: CatalogViewElements): void {
 }
 
 function renderSearch(filter: string, elements: CatalogViewElements): void {
+	if (!catalogLoaded) {
+		showLoadingState(elements);
+		return;
+	}
+	hideLoadingState(elements);
+
 	const normalizedFilter = filter.trim().toLowerCase();
 	const results = normalizedFilter
 		? catalogApis.filter((api) => `${api.name} ${api.provider} ${api.description} ${api.url}`.toLowerCase().includes(normalizedFilter))
@@ -146,9 +204,6 @@ function appendExplorerCards(elements: CatalogViewElements): void {
 	});
 	explorerVisibleCount = nextVisibleCount;
 	if (elements.explorerCount) elements.explorerCount.textContent = `${filteredExplorerApis.length} encontradas · mostrando ${explorerVisibleCount}`;
-	if (explorerVisibleCount < filteredExplorerApis.length && elements.explorerGrid.scrollHeight <= elements.explorerGrid.clientHeight) {
-		requestAnimationFrame(() => appendExplorerCards(elements));
-	}
 }
 
 function renderExplorerCards(filter: string, elements: CatalogViewElements): void {
@@ -185,14 +240,28 @@ function mapRemoteCatalog(data: unknown): CatalogApi[] {
 }
 
 async function loadCatalog(elements: CatalogViewElements): Promise<void> {
+	const cached = getCachedCatalog();
+	if (cached) {
+		catalogApis = cached;
+		catalogLoaded = true;
+		if (elements.explorerMessage) elements.explorerMessage.classList.add("hidden");
+		renderSearch(elements.searchInput?.value ?? "", elements);
+		renderExplorerCards(elements.explorerSearch?.value ?? "", elements);
+		return;
+	}
+
 	try {
 		const result = await fetchApi({ url: catalogSourceUrl, method: "GET", params: {}, headers: {}, auth: { type: "none" } });
 		catalogApis = mapRemoteCatalog(result.data);
+		setCachedCatalog(catalogApis);
+		catalogLoaded = true;
 		if (elements.explorerMessage) elements.explorerMessage.classList.add("hidden");
 	} catch {
 		catalogApis = [];
 		if (elements.explorerMessage) elements.explorerMessage.textContent = "Não foi possível carregar o catálogo remoto.";
 	}
+
+	hideLoadingState(elements);
 	renderSearch(elements.searchInput?.value ?? "", elements);
 	renderExplorerCards(elements.explorerSearch?.value ?? "", elements);
 }
@@ -201,6 +270,15 @@ function openExplorer(elements: CatalogViewElements): void {
 	elements.explorerModal?.classList.remove("hidden");
 	elements.explorerModal?.setAttribute("aria-hidden", "false");
 	elements.explorerSearch?.focus();
+
+	if (!catalogLoaded && elements.explorerGrid) {
+		elements.explorerGrid.innerHTML = `
+			<div class="explorer-loading">
+				<div class="spinner"></div>
+				<p>Carregando catálogo de APIs...</p>
+			</div>
+		`;
+	}
 }
 
 function closeExplorer(elements: CatalogViewElements): void {
@@ -211,33 +289,51 @@ function closeExplorer(elements: CatalogViewElements): void {
 export function initCatalog(): void {
 	const elements = getElements();
 	if (!elements.apiList || !elements.searchInput) return;
+
+	showLoadingState(elements);
+
 	const search = (): void => renderSearch(elements.searchInput?.value ?? "", elements);
-	elements.searchInput.addEventListener("input", search);
+	const debouncedSearch = debounce(search, 300);
+
+	elements.searchInput.addEventListener("input", debouncedSearch);
 	elements.searchInput.addEventListener("keydown", (event) => {
 		if (event.key !== "Enter") return;
 		event.preventDefault();
 		search();
 		elements.apiList?.querySelector<HTMLButtonElement>(".api-result-row")?.focus();
 	});
+
 	elements.modalClose?.addEventListener("click", () => closeModal(elements));
 	elements.modal?.addEventListener("click", (event) => {
 		if (event.target === elements.modal) closeModal(elements);
 	});
+
 	document.querySelector<HTMLButtonElement>("[data-open-explorer]")?.addEventListener("click", () => openExplorer(elements));
-	elements.explorerSearch?.addEventListener("input", () => renderExplorerCards(elements.explorerSearch?.value ?? "", elements));
+
+	const debouncedExplorerSearch = debounce((value: string) => {
+		renderExplorerCards(value, elements);
+	}, 300);
+
+	elements.explorerSearch?.addEventListener("input", (event) => {
+		debouncedExplorerSearch((event.target as HTMLInputElement).value);
+	});
+
 	elements.explorerGrid?.addEventListener("scroll", () => {
 		if (!elements.explorerGrid || explorerVisibleCount >= filteredExplorerApis.length) return;
 		if (elements.explorerGrid.scrollTop + elements.explorerGrid.clientHeight >= elements.explorerGrid.scrollHeight - 320) appendExplorerCards(elements);
 	});
+
 	elements.explorerClose?.addEventListener("click", () => closeExplorer(elements));
 	elements.explorerModal?.addEventListener("click", (event) => {
 		if (event.target === elements.explorerModal) closeExplorer(elements);
 	});
+
 	document.addEventListener("keydown", (event) => {
 		if (event.key !== "Escape") return;
 		closeModal(elements);
 		closeExplorer(elements);
 	});
+
 	renderSearch("", elements);
 	void loadCatalog(elements);
 }

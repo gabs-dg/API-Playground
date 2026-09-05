@@ -37,6 +37,7 @@
     .container {
         grid-template-columns: 1fr;
         height: auto;
+        overflow: visible;
     }
 
     .workspace-intro {
@@ -62,11 +63,16 @@
     .sidebar {
         border-right: none;
         border-bottom: 1px solid var(--border-color);
-        max-height: 28rem;
+        max-height: 50vh;
+        overflow-y: auto;
     }
 
     .sidebar-tabs {
         grid-template-columns: 1fr 1fr;
+    }
+
+    .api-list {
+        max-height: 30vh;
     }
 
     .explorer-modal {
@@ -109,7 +115,8 @@
         padding: 0.35rem 0.55rem;
     }
 
-    .method-select, .btn-send {
+    .method-select,
+    .btn-send {
         width: 100%;
         justify-content: center;
     }
@@ -120,5 +127,39 @@
 
     .field-wide {
         grid-column: span 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-inner {
+        flex-direction: column;
+        gap: 0.75rem;
+        padding: 0.75rem;
+    }
+
+    .main-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .nav-link {
+        font-size: 0.75rem;
+        padding: 0.4rem 0.6rem;
+    }
+
+    .sidebar {
+        max-height: 40vh;
+    }
+
+    .request-label {
+        min-width: auto;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .response-metrics {
+        flex-direction: column;
+        gap: 0.5rem;
     }
 }
