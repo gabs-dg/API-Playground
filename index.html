@@ -3,157 +3,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>API Playground</title>
+    <title>API Playground - Explore, Teste e Entenda APIs</title>
+    <meta name="description" content="Uma plataforma web para explorar, executar e visualizar requisições HTTP de forma simples e intuitiva.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <link rel="stylesheet" href="./src/styles/variables.css?v=20260904">
     <link rel="stylesheet" href="./src/styles/global.css?v=20260904">
-    <link rel="stylesheet" href="./src/styles/layout.css?v=20260904">
-    <link rel="stylesheet" href="./src/styles/responsive.css?v=20260904">
-    <link rel="stylesheet" href="./src/styles/components.css?v=20260904">
-    <link rel="stylesheet" href="./src/styles/animations.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/landing.css?v=20260904">
     <link rel="icon" type="image/png" href="./assets/LayoutLogo.png">
 </head>
 <body>
-    <header class="header">
-        <div class="header-inner">
-            <a class="brand" href="#request-builder" aria-label="API Playground - início">
+    <header class="landing-header">
+        <div class="container header-inner">
+            <a class="brand" href="index.html">
                 <span class="brand-mark"><img src="./assets/LayoutLogo.png" alt=""></span>
                 <span class="brand-copy">
                     <strong>API PLAYGROUND</strong>
-                    <small>Explore. Teste. Entenda.</small>
                 </span>
             </a>
-
-            <nav class="main-nav" aria-label="Navegação principal">
-                <a class="nav-link active" href="#request-builder">Request builder</a>
-                <a class="nav-link" href="#api-directory">API directory</a>
-                <a class="nav-link" href="./README.md">Documentação</a>
-                <a class="nav-link" href="./README.md#sobre-o-projeto">Sobre</a>
+            <nav class="main-nav">
+                <a href="#features">Recursos</a>
+                <a href="#how-it-works">Como funciona</a>
+                <a href="https://github.com/gabs-dg/API-Playground" target="_blank" rel="noreferrer">GitHub <span class="iconify" data-icon="ph:arrow-square-out"></span></a>
             </nav>
-
-            <div class="header-meta">
-                <span class="connection-status"><span class="status-dot"></span> Local session</span>
-                <span class="header-version">v1.0</span>
-            </div>
+            <a href="app.html" class="btn-primary">Abrir App</a>
         </div>
     </header>
 
-    <main class="container">
-        <aside class="sidebar" id="api-directory">
-            <div class="sidebar-heading">
-                <div>
-                    <span class="eyebrow">DIRECTORY</span>
-                    <h2>API catalog</h2>
+    <main>
+        <section class="hero">
+            <div class="container hero-content">
+                <span class="badge">v1.1 • Open Source</span>
+                <h1>Teste APIs sem complicação.</h1>
+                <p>Uma plataforma visual para explorar, construir e entender requisições HTTP. Sem configurações complexas, direto ao ponto.</p>
+                <div class="hero-actions">
+                    <a href="app.html" class="btn-primary">Começar agora <span class="iconify" data-icon="ph:arrow-right"></span></a>
+                    <a href="https://github.com/gabs-dg/API-Playground" target="_blank" rel="noreferrer" class="btn-secondary">
+                        <span class="iconify" data-icon="ph:github-logo"></span> Ver no GitHub
+                    </a>
                 </div>
-                <span class="catalog-count" id="catalog-count">0</span>
             </div>
-            <div class="sidebar-tabs" aria-label="Catálogo de APIs">
-                <button class="sidebar-tab active" type="button">Pesquisar</button>
-                <button class="sidebar-tab" type="button" data-open-explorer>Explorar APIs</button>
-            </div>
-            <section class="sidebar-panel" id="search-panel">
-                <label class="search-box" for="api-search">
-                    <span class="iconify" data-icon="ph:magnifying-glass"></span>
-                    <input id="api-search" type="search" placeholder="Ex.: Discord, GitHub...">
-                </label>
-                <div class="api-list" id="api-list"></div>
-                <p class="empty-state" id="api-empty">Digite o nome de uma API para pesquisar.</p>
-            </section>
-            <div class="sidebar-tip">
-                <span class="tip-icon"><span class="iconify" data-icon="ph:sparkle"></span></span>
-                <div><strong>Comece por uma API</strong><span>Escolha uma fonte ou cole seu próprio endpoint.</span></div>
-            </div>
-        </aside>
-
-        <section class="content" id="request-builder">
-            <div class="workspace-intro">
-                <div>
-                    <span class="eyebrow">REQUEST WORKSPACE</span>
-                    <h2>Construa uma requisição com clareza.</h2>
-                    <p>Configure o endpoint, autenticação e payload. O resultado aparece aqui, pronto para ser lido.</p>
+            <div class="hero-visual">
+                <div class="mockup-window">
+                    <div class="mockup-header">
+                        <span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span>
+                        <span class="mockup-url">api-playground.app</span>
+                    </div>
+                    <div class="mockup-body">
+                        <div class="mockup-sidebar">
+                            <div class="mockup-line short"></div>
+                            <div class="mockup-line"></div>
+                            <div class="mockup-line"></div>
+                            <div class="mockup-line active"></div>
+                        </div>
+                        <div class="mockup-main">
+                            <div class="mockup-row">
+                                <div class="mockup-box red"></div>
+                                <div class="mockup-line long"></div>
+                            </div>
+                            <div class="mockup-code">
+                                <div class="mockup-line"></div>
+                                <div class="mockup-line"></div>
+                                <div class="mockup-line short"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="workspace-badge"><span class="status-dot"></span> Proxy local ativo</div>
             </div>
+        </section>
 
-            <div class="request-box">
-                <div class="request-label"><span>Endpoint</span><small>HTTP request</small></div>
-                <select class="method-select" id="req-method">
-                    <option value="GET">GET</option>
-                    <option value="HEAD">HEAD</option>
-                    <option value="PUT">PUT</option>
-                    <option value="PATCH">PATCH</option>
-                    <option value="POST">POST</option>
-                    <option value="DELETE">DELETE</option>
-                    <option value="OPTIONS">OPTIONS</option>
-                </select>
-                <input type="text" class="url-input" id="req-url" value="https://jsonplaceholder.typicode.com/users">
-                <button class="btn-send" id="sendBtn">
-                    SEND REQUEST
-                    <span class="iconify" data-icon="ph:play-fill"></span>
-                </button>
-            </div>
-
-            <div class="request-options">
-                <label class="field-group field-wide">
-                    <span>Query params</span>
-                    <textarea id="req-params" placeholder="page=1&#10;limit=10"></textarea>
-                </label>
-                <label class="field-group field-wide">
-                    <span>Headers</span>
-                    <textarea id="req-headers" placeholder="X-Client: api-playground&#10;Accept: application/json"></textarea>
-                </label>
-                <div class="field-group">
-                    <label for="auth-type">Autenticação</label>
-                    <select id="auth-type">
-                        <option value="none">Nenhuma</option>
-                        <option value="bearer">Bearer token</option>
-                        <option value="basic">Basic Auth</option>
-                        <option value="api-key">API key</option>
-                    </select>
+        <section id="features" class="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Tudo que você precisa para trabalhar com APIs</h2>
+                    <p>Ferramentas essenciais reunidas em uma interface limpa e rápida.</p>
                 </div>
-                <label class="field-group auth-field" id="auth-token-field">
-                    <span>Token</span>
-                    <input type="password" id="auth-token" autocomplete="off" placeholder="Token de acesso">
-                </label>
-                <label class="field-group auth-field hidden" id="auth-username-field">
-                    <span>Usuário</span>
-                    <input type="text" id="auth-username" autocomplete="off">
-                </label>
-                <label class="field-group auth-field hidden" id="auth-password-field">
-                    <span>Senha</span>
-                    <input type="password" id="auth-password" autocomplete="off">
-                </label>
-                <label class="field-group auth-field hidden" id="auth-key-name-field">
-                    <span>Nome do header</span>
-                    <input type="text" id="auth-key-name" value="X-API-Key">
-                </label>
-                <label class="field-group auth-field hidden" id="auth-key-value-field">
-                    <span>Valor da API key</span>
-                    <input type="password" id="auth-key-value" autocomplete="off">
-                </label>
-                <label class="field-group field-wide">
-                    <span>Body</span>
-                    <textarea id="req-body" placeholder='{"name":"Ada"}'></textarea>
-                </label>
-            </div>
-
-            <div class="response-box">
-                <div class="response-info">
-                    <div><span class="response-label">Response</span><span class="response-caption">Último resultado recebido</span></div>
-                    <div class="response-metrics"><span class="status-tag" id="status">-</span><span class="time-tag" id="time">-</span></div>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon"><span class="iconify" data-icon="ph:magnifying-glass"></span></div>
+                        <h3>Catálogo com 2000+ APIs</h3>
+                        <p>Acesse especificações OpenAPI públicas e encontre endpoints prontos para testar em segundos.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><span class="iconify" data-icon="ph:code"></span></div>
+                        <h3>Request Builder Visual</h3>
+                        <p>Configure métodos, headers, autenticação e body sem escrever código manualmente.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><span class="iconify" data-icon="ph:lightning"></span></div>
+                        <h3>Respostas em Tempo Real</h3>
+                        <p>Veja o retorno da API formatado, com status, tempo de resposta e métricas detalhadas.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon"><span class="iconify" data-icon="ph:export"></span></div>
+                        <h3>Exportação de Código</h3>
+                        <p>Gere snippets em cURL, fetch, axios ou Python com um clique para usar no seu projeto.</p>
+                    </div>
                 </div>
-                <pre class="code-block" id="response">Clique em SEND REQUEST para testar</pre>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="how-it-works">
+          <div class="container">
+        <div class="section-header">
+            <h2>Como funciona</h2>
+            <p>Três passos simples para testar qualquer API.</p>
+        </div>
+        <div class="steps-grid">
+            <div class="step">
+                <div class="step-icon"><span class="iconify" data-icon="ph:magnifying-glass"></span></div>
+                <h3>Escolha uma API</h3>
+                <p>Pesquise no catálogo com mais de 2000 APIs públicas ou cole seu próprio endpoint na barra de requisição.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><span class="iconify" data-icon="ph:sliders-horizontal"></span></div>
+                <h3>Configure a Request</h3>
+                <p>Defina o método HTTP, adicione headers, parâmetros de query e autenticação de forma visual e intuitiva.</p>
+            </div>
+            <div class="step">
+                <div class="step-icon"><span class="iconify" data-icon="ph:code"></span></div>
+                <h3>Analise o Resultado</h3>
+                <p>Envie a requisição e visualize a resposta JSON formatada, com status, tempo de resposta e métricas detalhadas.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <section class="cta-section">
+            <div class="container">
+                <h2>Pronto para explorar a web aberta?</h2>
+                <p>Comece a testar APIs agora mesmo. Sem cadastro, sem instalação.</p>
+                <a href="app.html" class="btn-primary">Abrir o Playground <span class="iconify" data-icon="ph:arrow-right"></span></a>
             </div>
         </section>
     </main>
 
-    <footer class="site-footer" id="about">
-        <div class="footer-main">
+    <footer class="site-footer">
+        <div class="container footer-main">
             <div class="footer-brand">
-                <a class="brand footer-brand-link" href="#request-builder">
+                <a class="brand footer-brand-link" href="index.html">
                     <span class="brand-mark"><img src="./assets/LayoutLogo.png" alt=""></span>
                     <span class="brand-copy"><strong>API PLAYGROUND</strong><small>Explore. Teste. Entenda.</small></span>
                 </a>
@@ -161,59 +151,22 @@
             </div>
             <div class="footer-column">
                 <span class="footer-title">Navegar</span>
-                <a href="#request-builder">Request builder</a>
-                <a href="#api-directory">API directory</a>
-                <a href="./README.md">Documentação</a>
+                <a href="app.html">Request builder</a>
+                <a href="#features">Recursos</a>
+                <a href="#how-it-works">Como funciona</a>
             </div>
             <div class="footer-column">
                 <span class="footer-title">Projeto</span>
-                <a href="./README.md#sobre-o-projeto">Sobre o projeto</a>
-                <a href="./README.md#consumo-de-apis">Consumo de APIs</a>
-                <a href="./README.md#tratamento-de-respostas">Respostas HTTP</a>
+                <a href="https://github.com/gabs-dg/API-Playground" target="_blank" rel="noreferrer">GitHub</a>
+                <a href="https://github.com/gabs-dg/API-Playground/blob/main/README.md">Documentação</a>
             </div>
             <div class="footer-column">
                 <span class="footer-title">Contato</span>
-                <a href="https://github.com" target="_blank" rel="noreferrer"><span class="iconify" data-icon="ph:github-logo"></span> GitHub</a>
-                <a href="mailto:contato@apiplayground.dev"><span class="iconify" data-icon="ph:envelope"></span> E-mail</a>
+                <a href="https://github.com/gabs-dg" target="_blank" rel="noreferrer"><span class="iconify" data-icon="ph:github-logo"></span> GitHub</a>
                 <span class="footer-muted">Feito para quem trabalha com APIs.</span>
             </div>
         </div>
         <div class="footer-bottom"><span>API Playground © 2026</span><span>Construído para explorar a web aberta.</span></div>
     </footer>
-
-    <div class="api-modal hidden" id="api-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="api-modal-title">
-        <div class="api-modal-window">
-            <button class="modal-close" id="api-modal-close" type="button" aria-label="Fechar detalhes">
-                <span class="iconify" data-icon="ph:x"></span>
-            </button>
-            <div id="api-modal-content"></div>
-        </div>
-    </div>
-
-    <div class="explorer-modal hidden" id="explorer-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="explorer-title">
-        <div class="explorer-window">
-            <div class="explorer-header">
-                <div>
-                    <span class="eyebrow">PUBLIC DIRECTORY</span>
-                    <h2 id="explorer-title">Explore APIs</h2>
-                    <p>Catálogo central com APIs públicas e suas especificações OpenAPI.</p>
-                </div>
-                <button class="modal-close" id="explorer-close" type="button" aria-label="Fechar explorador">
-                    <span class="iconify" data-icon="ph:x"></span>
-                </button>
-            </div>
-            <div class="explorer-toolbar">
-                <label class="search-box" for="explorer-search">
-                    <span class="iconify" data-icon="ph:magnifying-glass"></span>
-                    <input id="explorer-search" type="search" placeholder="Buscar centenas de APIs...">
-                </label>
-                <span class="explorer-count" id="explorer-count">Carregando...</span>
-            </div>
-            <p class="explorer-message" id="explorer-message">Carregando catálogo...</p>
-            <div class="explorer-grid" id="explorer-grid"></div>
-        </div>
-    </div>
-
-    <script type="module" src="./dist/index.js?v=20260904"></script>
 </body>
 </html>

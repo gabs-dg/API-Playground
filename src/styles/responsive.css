@@ -128,6 +128,32 @@
     .field-wide {
         grid-column: span 1;
     }
+    .content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    }
+
+    .workspace-intro,
+    .request-box,
+    .request-options,
+    .response-box {
+        grid-column: 1;
+        grid-row: auto;
+     }
+
+    .response-box {
+        min-height: 200px;
+        max-height: 60vh;
+        overflow: hidden;
+    }
+
+    .code-block {
+        max-height: 100%;
+        overflow-y: auto;
+        overflow-x: auto;
+        white-space: pre;
+        word-break: break-all;
+    }
 }
 
 @media (max-width: 480px) {
