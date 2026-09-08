@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação - API Playground</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="./src/styles/variables.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/global.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/layout.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/responsive.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/components.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/docs.css?v=20260904">
+    <link rel="icon" type="image/png" href="./assets/LayoutLogo.png">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="API Playground - início">
+                <span class="brand-mark"><img src="./assets/LayoutLogo.png" alt=""></span>
+                <span class="brand-copy">
+                    <strong>API PLAYGROUND</strong>
+                    <small>Explore. Teste. Entenda.</small>
+                </span>
+            </a>
+            <nav class="main-nav" aria-label="Navegação principal">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="app.html">Request builder</a>
+                <a class="nav-link active" href="docs.html">Documentação</a>
+                <a class="nav-link" href="about.html">Sobre</a>
+            </nav>
+            <div class="header-meta">
+                <span class="connection-status"><span class="status-dot"></span> Local session</span>
+                <span class="header-version">v1.1</span>
+            </div>
+        </div>
+    </header>
+
+    <div class="docs-wrapper">
+        <aside class="docs-sidebar">
+            <div class="docs-sidebar-title">Navegação</div>
+            <nav class="docs-nav">
+                <a href="#introducao" class="active">Introdução</a>
+                <a href="#sobre">Sobre o Projeto</a>
+                <a href="#como-funciona">Como Funciona</a>
+                <a href="#arquitetura">Arquitetura</a>
+                <a href="#tecnologias">Tecnologias</a>
+                <a href="#decisoes-tecnicas">Decisões Técnicas</a>
+                <a href="#primeiros-passos">Primeiros Passos</a>
+                <a href="#atalhos">Atalhos de Teclado</a>
+                <a href="#exportacao">Exportação de Código</a>
+                <a href="#autenticacao">Autenticação</a>
+                <a href="#respostas-http">Respostas HTTP</a>
+                <a href="#troubleshooting">Troubleshooting</a>
+            </nav>
+        </aside>
+
+    <main class="docs-content">
+            <h1 id="introducao">Documentação</h1>
+            <p class="subtitle">Tudo o que você precisa para explorar, testar e entender requisições HTTP de forma rápida, visual e didática.</p>
+
+            <h2 id="sobre">ℹ️ Sobre o Projeto</h2>
+            <p>O <strong>API Playground</strong> é uma aplicação web desenvolvida para facilitar a exploração e o consumo de APIs públicas através de uma interface gráfica.</p>
+            <p>A proposta é permitir que você selecione uma API, configure uma requisição, envie a solicitação e visualize a resposta retornada pelo servidor sem precisar escrever código ou utilizar ferramentas externas complexas.</p>
+            
+            <div class="callout info">
+                <div class="callout-icon"><span class="iconify" data-icon="ph:info"></span></div>
+                <div class="callout-content">
+                    <strong>Nota Importante</strong>
+                    <p>O API Playground não tem como objetivo substituir ferramentas profissionais como Postman ou Insomnia. A proposta é oferecer uma experiência mais simples e didática para aprender e testar requisições HTTP.</p>
+                </div>
+            </div>
+
+            <h2 id="como-funciona">⚙️ Como Funciona</h2>
+            <p>O fluxo da aplicação é dividido em cinco etapas principais:</p>
+            <ol>
+                <li><strong>Seleção da API:</strong> Escolha uma das APIs do catálogo ou insira seu próprio endpoint.</li>
+                <li><strong>Configuração:</strong> Defina o método HTTP, URL, parâmetros, headers e body conforme necessário.</li>
+                <li><strong>Execução:</strong> Ao clicar em "Send", o JavaScript utiliza a <code>Fetch API</code> para fazer a requisição.</li>
+                <li><strong>Processamento:</strong> A resposta é analisada, extraindo Status HTTP, tempo de resposta, Content-Type e os dados brutos.</li>
+                <li><strong>Visualização:</strong> A interface apresenta o JSON formatado de forma clara e legível.</li>
+            </ol>
+
+            <h2 id="arquitetura">🏗️ Arquitetura</h2>
+            <p>O projeto foi organizado separando a comunicação com APIs da camada responsável pela apresentação dos dados, seguindo o princípio da Separação de Responsabilidades:</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>API Layer</h3>
+                    <p>Responsável pela comunicação HTTP, endpoints, parâmetros, headers, parsing das respostas e tratamento de erros.</p>
+                </div>
+                <div class="feature-card">
+                    <h3>UI Layer</h3>
+                    <p>Responsável pelo HTML, componentes visuais, eventos do DOM, apresentação dos dados e responsividade.</p>
+                </div>
+            </div>
+
+            <h2 id="tecnologias">🛠️ Tecnologias</h2>
+            <p>O projeto utiliza tecnologias nativas da Web, sem dependência de frameworks pesados:</p>
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>Tecnologia</th>
+                        <th>Utilização</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>HTML5</td><td>Estrutura semântica da aplicação</td></tr>
+                    <tr><td>CSS3</td><td>Estilização, layout (Grid/Flexbox) e variáveis</td></tr>
+                    <tr><td>TypeScript</td><td>Lógica da aplicação com tipagem estática</td></tr>
+                    <tr><td>Fetch API</td><td>Comunicação HTTP assíncrona</td></tr>
+                    <tr><td>JSON</td><td>Manipulação e formatação dos dados</td></tr>
+                    <tr><td>Git / GitHub</td><td>Controle de versão e hospedagem</td></tr>
+                </tbody>
+            </table>
+
+            <h2 id="decisoes-tecnicas">💡 Decisões Técnicas</h2>
+            <h3>Por que JavaScript/TypeScript puro?</h3>
+            <p>A ausência de frameworks como React ou Vue é intencional. O objetivo é compreender e demonstrar o funcionamento fundamental de uma aplicação Web antes de adicionar abstrações. Conceitos como <code>fetch()</code>, <code>async/await</code>, <code>Promise</code>, <code>DOM</code> e <code>Modules</code> são utilizados diretamente.</p>
+            
+            <h3>Separação de Responsabilidades</h3>
+            <p>A interface não executa chamadas de API diretamente nos eventos. Preferimos usar uma camada de serviço:</p>
+            <div class="code-block-wrapper">
+                <div class="code-block-header">
+                    <span class="code-block-lang">typescript</span>
+                </div>
+                <pre><code>// Evitar: Lógica misturada no evento
+button.addEventListener("click", async () => {
+    const response = await fetch("https://api.example.com/users");
+    // ... toda a lógica aqui
+});
+
+// Preferir: Separação clara
+button.addEventListener("click", async () => {
+    const result = await getUsers(); // Camada de serviço
+    renderUsers(result);             // Camada de UI
+});</code></pre>
+            </div>
+
+            <h2 id="primeiros-passos">🚀 Primeiros Passos</h2>
+            <p>Fazer sua primeira requisição leva menos de 10 segundos:</p>
+            <ol>
+                <li>Abra o <strong>Request Builder</strong> no menu superior.</li>
+                <li>Selecione o método HTTP (GET, POST, PUT, etc).</li>
+                <li>Cole a URL do endpoint no campo de texto.</li>
+                <li>Clique em <strong>SEND REQUEST</strong> ou pressione <kbd>Ctrl</kbd> + <kbd>Enter</kbd>.</li>
+            </ol>
+
+            <div class="callout tip">
+                <div class="callout-icon"><span class="iconify" data-icon="ph:lightbulb"></span></div>
+                <div class="callout-content">
+                    <strong>Dica Pro</strong>
+                    <p>Use o catálogo lateral para buscar APIs públicas (como GitHub, Discord, OpenWeather) e carregar endpoints prontos com um clique.</p>
+                </div>
+            </div>
+
+            <h2 id="atalhos">⌨️ Atalhos de Teclado</h2>
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>Atalho</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><kbd>Ctrl</kbd> + <kbd>K</kbd></td>
+                        <td>Foca automaticamente no campo de busca do catálogo</td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Ctrl</kbd> + <kbd>Enter</kbd></td>
+                        <td>Envia a requisição atual imediatamente</td>
+                    </tr>
+                    <tr>
+                        <td><kbd>Esc</kbd></td>
+                        <td>Fecha modais abertos (Exportar, Detalhes da API, Explorador)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2 id="exportacao">📦 Exportação de Código</h2>
+            <p>Ao clicar no botão <strong>Exportar</strong>, você pode gerar o código da sua requisição atual em várias linguagens. Exemplo de saída cURL:</p>
+            
+            <div class="code-block-wrapper">
+                <div class="code-block-header">
+                    <span class="code-block-lang">bash</span>
+                    <button class="code-block-copy"><span class="iconify" data-icon="ph:copy"></span> Copiar</button>
+                </div>
+                <pre><code>curl -X POST "https://api.exemplo.com/v1/users" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer YOUR_TOKEN" \
+  -d '{"name": "Ada", "email": "ada@example.com"}'</code></pre>
+            </div>
+
+            <h2 id="autenticacao">🔐 Autenticação</h2>
+            <p>O API Playground suporta os métodos de autenticação mais usados no mercado:</p>
+            <ul>
+                <li><strong>Bearer Token:</strong> Insira seu token JWT ou OAuth2. Ele será enviado automaticamente no header <code>Authorization</code>.</li>
+                <li><strong>Basic Auth:</strong> Forneça usuário e senha. As credenciais são codificadas em Base64 antes do envio.</li>
+                <li><strong>API Key:</strong> Configure o nome do header (ex: <code>X-API-Key</code>) e o valor da sua chave.</li>
+            </ul>
+
+            <h2 id="respostas-http">📊 Entendendo Respostas HTTP</h2>
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Significado</th>
+                        <th>Quando aparece</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td><kbd>200</kbd></td><td>OK</td><td>Requisição bem-sucedida</td></tr>
+                    <tr><td><kbd>201</kbd></td><td>Created</td><td>Recurso criado com sucesso (POST)</td></tr>
+                    <tr><td><kbd>400</kbd></td><td>Bad Request</td><td>Requisição malformada ou dados inválidos</td></tr>
+                    <tr><td><kbd>401</kbd></td><td>Unauthorized</td><td>Autenticação necessária ou inválida</td></tr>
+                    <tr><td><kbd>403</kbd></td><td>Forbidden</td><td>Acesso negado (sem permissão)</td></tr>
+                    <tr><td><kbd>404</kbd></td><td>Not Found</td><td>Recurso não encontrado</td></tr>
+                    <tr><td><kbd>500</kbd></td><td>Internal Server Error</td><td>Erro no servidor da API</td></tr>
+                </tbody>
+            </table>
+
+            <h2 id="troubleshooting">🛠️ Troubleshooting</h2>
+            <h3>Erro de CORS (Cross-Origin Resource Sharing)</h3>
+            <p>Se você receber um erro de CORS, o servidor da API não permite requisições diretas do navegador. O API Playground roda 100% no cliente, sujeito às restrições de segurança do browser.</p>
+            <div class="callout warning">
+                <div class="callout-icon"><span class="iconify" data-icon="ph:warning"></span></div>
+                <div class="callout-content">
+                    <strong>Solução</strong>
+                    <p>Use APIs que permitem CORS (como JSONPlaceholder). Para APIs privadas, use uma extensão de navegador que desabilite CORS temporariamente apenas para desenvolvimento.</p>
+                </div>
+            </div>
+            
+            <h3>A resposta está vazia ou com erro 404</h3>
+            <p>Verifique se a URL está completa (incluindo <code>https://</code>) e se o método HTTP selecionado é o correto para aquele endpoint.</p>
+        </main>
+    </div>
+
+    <footer class="site-footer" id="site-footer"></footer>
+    <script type="module" src="./dist/index.js?v=20260904"></script>
+
+</body>
+</html>
