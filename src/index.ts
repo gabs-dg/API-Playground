@@ -4,6 +4,9 @@ import { initExportModal } from "./layouts/components/exportModal.js";
 import { initShortcuts } from "./shortcuts.js";
 import { initDocs } from "./docs.js";
 import { renderFooter } from "./shared/footer.js";
+import { initResponseActions } from "./layouts/components/responseActions.js";
+import { initQuickHeaders } from "./layouts/components/quickHeaders.js";
+import { initRequestHistory } from "./layouts/components/requestHistory.js";
 
 function initApp(): void {
     initRequestBuilder();
@@ -12,6 +15,9 @@ function initApp(): void {
     initShortcuts();
     initDocs();
     renderFooter();
+    initResponseActions();
+    initQuickHeaders();
+    initRequestHistory();
 }
 
 if (document.readyState === "loading") {

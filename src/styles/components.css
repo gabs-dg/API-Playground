@@ -1305,3 +1305,193 @@
 .toast.success .toast-icon { color: #10b981; }
 .toast.error .toast-icon { color: #f87171; }
 .toast.info .toast-icon { color: var(--red-primary); }
+
+.response-actions {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-input);
+    border-top: 1px solid var(--border-color);
+    border-radius: 0 0 8px 8px;
+}
+
+.response-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.8rem;
+    background-color: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 600;
+    transition: all 0.15s ease;
+}
+
+.response-action-btn:hover {
+    background-color: var(--red-primary);
+    border-color: var(--red-primary);
+    color: white;
+}
+
+.quick-headers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.quick-header-btn {
+    padding: 0.35rem 0.7rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 0.7rem;
+    font-weight: 500;
+    transition: all 0.15s ease;
+}
+
+.quick-header-btn:hover {
+    background-color: var(--red-primary);
+    border-color: var(--red-primary);
+    color: white;
+}
+
+#history-panel {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.history-header {
+    margin-bottom: 1rem;
+}
+
+.history-header h3 {
+    margin: 0.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--text-soft);
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.history-empty {
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-align: center;
+    padding: 1rem;
+}
+
+.history-item {
+    padding: 0.75rem;
+    background-color: var(--bg-input);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.history-item:hover {
+    border-color: var(--red-primary);
+    background-color: rgb(220 38 38 / 5%);
+}
+
+.history-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.4rem;
+}
+
+.history-method {
+    font-size: 0.65rem;
+    font-weight: 700;
+    padding: 0.2rem 0.5rem;
+    border-radius: 3px;
+    text-transform: uppercase;
+}
+
+.history-method.get { background-color: rgb(59 130 246 / 20%); color: #60a5fa; }
+.history-method.post { background-color: rgb(16 185 129 / 20%); color: #34d399; }
+.history-method.put { background-color: rgb(245 158 11 / 20%); color: #fbbf24; }
+.history-method.delete { background-color: rgb(239 68 68 / 20%); color: #f87171; }
+.history-method.patch { background-color: rgb(168 85 247 / 20%); color: #c084fc; }
+
+.history-time {
+    font-size: 0.65rem;
+    color: var(--text-muted);
+    font-family: monospace;
+}
+
+.history-url {
+    font-size: 0.75rem;
+    color: var(--text-soft);
+    font-family: monospace;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.response-box {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    max-height: calc(100vh - 200px);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--bg-panel);
+    overflow: hidden;
+}
+
+.response-info {
+    flex-shrink: 0;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    background-color: var(--bg-panel);
+}
+
+.code-block {
+    flex: 1;
+    margin: 0;
+    padding: 1rem;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: #0d0d0d;
+    border-radius: 0;
+    max-height: 100%;
+}
+
+.response-actions {
+    flex-shrink: 0;
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    background-color: var(--bg-input);
+    border-top: 1px solid var(--border-color);
+}
+
+.code-block::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.code-block::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+.code-block::-webkit-scrollbar-thumb {
+    background: rgb(255 255 255 / 15%);
+    border-radius: 4px;
+}
+
+.code-block::-webkit-scrollbar-thumb:hover {
+    background: rgb(255 255 255 / 25%);
+}

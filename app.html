@@ -37,7 +37,7 @@
 
             <div class="header-meta">
                 <span class="connection-status"><span class="status-dot"></span> Local session</span>
-                <span class="header-version">v1.1</span>
+                <span class="header-version">v1.2</span>
             </div>
         </div>
     </header>
@@ -63,6 +63,16 @@
                 <div class="api-list" id="api-list"></div>
                 <p class="empty-state" id="api-empty">Digite o nome de uma API para pesquisar.</p>
             </section>
+
+            <!-- NOVO: Painel de Histórico -->
+            <section class="sidebar-panel" id="history-panel">
+                <div class="history-header">
+                    <span class="eyebrow">RECENT</span>
+                    <h3>Histórico</h3>
+                </div>
+                <div class="history-list" id="request-history"></div>
+            </section>
+
             <div class="sidebar-tip">
                 <span class="tip-icon"><span class="iconify" data-icon="ph:sparkle"></span></span>
                 <div><strong>Comece por uma API</strong><span>Escolha uma fonte ou cole seu próprio endpoint.</span></div>
@@ -109,6 +119,10 @@
                     <span>Headers</span>
                     <textarea id="req-headers" placeholder="X-Client: api-playground&#10;Accept: application/json"></textarea>
                 </label>
+                
+                <!-- NOVO: Botões de Quick Headers -->
+                <div class="quick-headers" id="quick-headers"></div>
+
                 <div class="field-group">
                     <label for="auth-type">Autenticação</label>
                     <select id="auth-type">
@@ -150,6 +164,19 @@
                     <div class="response-metrics"><span class="status-tag" id="status">-</span><span class="time-tag" id="time">-</span></div>
                 </div>
                 <pre class="code-block" id="response">Clique em SEND REQUEST para testar</pre>
+                
+                <!-- NOVO: Ações da Resposta (movido para dentro da response-box para ficar visualmente agrupado) -->
+                <div class="response-actions" id="response-actions">
+                    <button class="response-action-btn" id="btn-copy-response" type="button">
+                        <span class="iconify" data-icon="ph:copy"></span> Copiar
+                    </button>
+                    <button class="response-action-btn" id="btn-format-json" type="button">
+                        <span class="iconify" data-icon="ph:brackets-curly"></span> Format
+                    </button>
+                    <button class="response-action-btn" id="btn-minify-json" type="button">
+                        <span class="iconify" data-icon="ph:brackets-curly"></span> Minify
+                    </button>
+                </div>
             </div>
         </section>
     </main>
@@ -212,6 +239,5 @@
     
     <footer class="site-footer" id="site-footer"></footer>
     <script type="module" src="./dist/index.js?v=20260904"></script>
-
 </body>
 </html>

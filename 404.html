@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Página não encontrada</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="./src/styles/variables.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/global.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/layout.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/error.css?v=20260904">
+    <link rel="icon" type="image/png" href="./assets/LayoutLogo.png">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="API Playground - início">
+                <span class="brand-mark"><img src="./assets/LayoutLogo.png" alt=""></span>
+                <span class="brand-copy">
+                    <strong>API PLAYGROUND</strong>
+                    <small>Explore. Teste. Entenda.</small>
+                </span>
+            </a>
+            <nav class="main-nav" aria-label="Navegação principal">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="app.html">Request builder</a>
+                <a class="nav-link" href="docs.html">Documentação</a>
+                <a class="nav-link" href="about.html">Sobre</a>
+            </nav>
+            <div class="header-meta">
+                <span class="connection-status"><span class="status-dot"></span> Local session</span>
+                <span class="header-version">v1.2</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="error-wrapper">
+        <div class="error-container">
+            <div class="error-code">404</div>
+            <h1 class="error-title">Página não encontrada</h1>
+            <p class="error-message">A URL que você tentou acessar não existe ou foi movida. Verifique o endereço ou volte para a página inicial.</p>
+            
+            <div class="error-actions">
+                <a href="index.html" class="error-btn">
+                    <span class="iconify" data-icon="ph:house"></span> Voltar ao início
+                </a>
+                <div class="error-countdown">
+                    <span class="iconify" data-icon="ph:timer"></span>
+                    Redirecionando em <strong id="countdown">10</strong>s
+                </div>
+            </div>
+
+            <div class="error-hint">
+                Procurando algo específico? Acesse a <a href="docs.html">documentação</a> ou o <a href="app.html">Request Builder</a>.
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+
+    <script type="module" src="./dist/index.js?v=20260904"></script>
+    <script>
+        let seconds = 10;
+        const countdownEl = document.getElementById("countdown");
+        const interval = setInterval(() => {
+            seconds--;
+            if (countdownEl) countdownEl.textContent = seconds;
+            if (seconds <= 0) {
+                clearInterval(interval);
+                window.location.href = "index.html";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
