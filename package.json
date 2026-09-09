@@ -7,7 +7,7 @@
     "dev": "tsc && tsc-alias && node server.mjs",
     "build": "tsc && tsc-alias",
     "start": "node server.mjs"
-  }
+  },
   "keywords": [],
   "type": "module",
   "devDependencies": {
