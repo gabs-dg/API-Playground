@@ -4,10 +4,10 @@
   "description": "<p align=\"center\">",
   "main": "index.js",
   "scripts": {
-    "dev": ".\\node_modules\\.bin\\tsc.cmd && .\\node_modules\\.bin\\tsc-alias.cmd && node server.mjs",
-    "build": ".\\node_modules\\.bin\\tsc.cmd && .\\node_modules\\.bin\\tsc-alias.cmd",
+    "dev": "tsc && tsc-alias && node server.mjs",
+    "build": "tsc && tsc-alias",
     "start": "node server.mjs"
-  },
+  }
   "keywords": [],
   "type": "module",
   "devDependencies": {
