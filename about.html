@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre - API Playground</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
+    <link rel="stylesheet" href="./src/styles/variables.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/global.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/layout.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/responsive.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/components.css?v=20260904">
+    <link rel="stylesheet" href="./src/styles/about.css?v=20260904">
+    <link rel="icon" type="image/png" href="./assets/LayoutLogo.png">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <a class="brand" href="index.html" aria-label="API Playground - início">
+                <span class="brand-mark"><img src="./assets/LayoutLogo.png" alt=""></span>
+                <span class="brand-copy">
+                    <strong>API PLAYGROUND</strong>
+                    <small>Explore. Teste. Entenda.</small>
+                </span>
+            </a>
+            <nav class="main-nav" aria-label="Navegação principal">
+                <a class="nav-link" href="index.html">Início</a>
+                <a class="nav-link" href="app.html">Request builder</a>
+                <a class="nav-link" href="docs.html">Documentação</a>
+                <a class="nav-link active" href="about.html">Sobre</a>
+            </nav>
+            <div class="header-meta">
+                <span class="connection-status"><span class="status-dot"></span> Local session</span>
+                <span class="header-version">v1.2</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="about-wrapper">
+        <div class="about-container">
+            <div class="about-hero">
+                <div class="about-logo-box">
+                    <img src="./assets/LayoutLogo.png" alt="API Playground Logo">
+                </div>
+                <h1>Sobre o <span>API Playground</span></h1>
+                <p>Nascido da necessidade de ter uma ferramenta leve, rápida e visualmente clara para testar requisições HTTP sem a complexidade de softwares pesados.</p>
+            </div>
+
+            <div class="about-section">
+                <h2><span class="iconify" data-icon="ph:target"></span> Nossa Missão</h2>
+                <p>Simplificar o fluxo de trabalho de desenvolvedores, oferecendo um catálogo integrado, exportação de código instantânea e uma interface que prioriza a legibilidade das respostas. Tudo isso rodando direto no navegador, sem instalações.</p>
+                
+                <div class="tech-stack">
+                    <span class="tech-pill"><span class="iconify" data-icon="ph:file-html"></span> HTML5 & CSS3</span>
+                    <span class="tech-pill"><span class="iconify" data-icon="ph:file-ts"></span> TypeScript</span>
+                    <span class="tech-pill"><span class="iconify" data-icon="ph:palette"></span> Design System Próprio</span>
+                    <span class="tech-pill"><span class="iconify" data-icon="ph:lightning"></span> Zero Frameworks Pesados</span>
+                </div>
+            </div>
+
+            <div class="about-section">
+                <h2><span class="iconify" data-icon="ph:users-three"></span> Desenvolvido Por</h2>
+                <div class="team-grid">
+                    <a href="https://github.com/gabs-dg" target="_blank" rel="noreferrer" class="team-card">
+                        <div class="team-avatar">G</div>
+                        <h3>gabs-dg</h3>
+                        <span>Criador & Lead Developer</span>
+                        <div class="team-github">
+                            <span class="iconify" data-icon="ph:github-logo"></span> @gabs-dg
+                        </div>
+                    </a>
+                    <a href="https://github.com/akiradv" target="_blank" rel="noreferrer" class="team-card">
+                        <div class="team-avatar">A</div>
+                        <h3>akiradv</h3>
+                        <span>Core Contributor</span>
+                        <div class="team-github">
+                            <span class="iconify" data-icon="ph:github-logo"></span> @akiradv
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="about-section cta-section">
+                <h2><span class="iconify" data-icon="ph:hand-heart"></span> Contribua com o Projeto</h2>
+                <p>Este é um projeto open-source. Encontrou um bug, tem uma ideia de feature ou quer melhorar a documentação? Sua contribuição é muito bem-vinda!</p>
+                <div class="btn-group">
+                    <a href="https://github.com/gabs-dg/API-Playground" target="_blank" rel="noreferrer" class="btn-primary">
+                        <span class="iconify" data-icon="ph:github-logo"></span> Ver no GitHub
+                    </a>
+                    <a href="https://github.com/gabs-dg/API-Playground/issues" target="_blank" rel="noreferrer" class="btn-secondary">
+                        <span class="iconify" data-icon="ph:bug"></span> Reportar Bug
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="site-footer" id="site-footer"></footer>
+    <script type="module" src="./dist/index.js?v=20260904"></script>
+ 
+</body>
+</html>
