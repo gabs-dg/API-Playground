@@ -120,7 +120,7 @@ function listen() {
 		port += 1;
 		listen();
 	});
-	server.listen(port, () => {
+	server.listen(port, "0.0.0.0", () => {
 		if (hasLoggedStartup) return;
 		hasLoggedStartup = true;
 		process.stdout.write(`API Playground disponível em http://localhost:${port}\n`);
