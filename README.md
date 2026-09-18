@@ -9,6 +9,7 @@
 <p align="center">
   Uma plataforma web para explorar, executar e visualizar requisições HTTP de forma simples e intuitiva.
 </p>
+<a href="https://api-playground-2.onrender.com">Ver projeto</a>
 
 
 ## Sumário
